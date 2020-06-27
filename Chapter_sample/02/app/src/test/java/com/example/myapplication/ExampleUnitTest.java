@@ -22,10 +22,10 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
 
     @Test
-    public void testLazy(){
+    public void testProvider(){
         CounterComponent component = DaggerCounterComponent.create();
         Counter counter = new Counter();
         component.inject(counter);
-        counter.printLazy();
+        counter.printProvider();
     }
 }
