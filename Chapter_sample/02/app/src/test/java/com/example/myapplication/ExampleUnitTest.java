@@ -10,8 +10,13 @@ import com.example.myapplication._02.MyComponent2;
 import com.example.myapplication._02.PersonA;
 import com.example.myapplication._02.PersonB;
 import com.example.myapplication._02.PersonComponent;
+import com.example.myapplication.lazy_Provider.Counter;
+import com.example.myapplication.lazy_Provider.CounterComponent;
+import com.example.myapplication.lazy_Provider.DaggerCounterComponent;
 
 import org.junit.Test;
+
+import dagger.android.support.DaggerFragment;
 
 import static org.junit.Assert.*;
 
@@ -55,5 +60,13 @@ public class ExampleUnitTest {
         assertEquals("Charles", personB.getName());
 
         assertEquals(100, personB.getAge());
+    }
+
+    @Test
+    public void testLazy(){
+        CounterComponent component = DaggerCounterComponent.create();
+        Counter counter = new Counter();
+        component.inject(counter);
+        counter.printLazy();
     }
 }
