@@ -9,4 +9,20 @@ public class MyClass {
 
     @Inject
     String strWorld;
+
+    public String getStrHello() {
+        return strHello;
+    }
+
+    public void setStrHello(String strHello) {
+        this.strHello = strHello;
+    }
+
+    public String getStrWorld() {
+        return strWorld;
+    }
+
+    public void setStrWorld(String strWorld) {
+        this.strWorld = strWorld;
+    }
 }

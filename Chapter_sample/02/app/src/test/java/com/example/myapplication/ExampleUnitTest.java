@@ -18,8 +18,8 @@ public class ExampleUnitTest {
     public void myComponent() {
         MyClass myClass = new MyClass();
         DaggerMyComponent.create().inject(myClass);
-        System.out.println(myClass.);
-        System.out.println(myClass);
+        System.out.println(myClass.getStrHello());
+        System.out.println(myClass.getStrWorld());
     }
 
 }
