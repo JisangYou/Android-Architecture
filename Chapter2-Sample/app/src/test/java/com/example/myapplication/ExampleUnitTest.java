@@ -8,6 +8,11 @@ import com.example.myapplication.Binds.DaggerNoStrComponent;
 import com.example.myapplication.Binds.DaggerStrComponent;
 import com.example.myapplication.Binds.Foo;
 import com.example.myapplication.Binds.Foo2;
+import com.example.myapplication.MapMultiBinding.DaggerMapComponent;
+import com.example.myapplication.MapMultiBinding.Foo4;
+import com.example.myapplication.MapMultiBinding.MapComponent;
+import com.example.myapplication.SetMultiBinding.DaggerSetComponent;
+import com.example.myapplication.SetMultiBinding.Foo3;
 
 import org.junit.Test;
 
@@ -39,6 +44,23 @@ public class ExampleUnitTest {
         BindsComponent component = DaggerBindsComponent.builder().setString(hello).build();
         component.inject(foo);
         assertEquals("Hello World", foo.str);
+    }
+
+    @Test
+    public void testMultibindingSet() {
+        Foo3 foo3 = new Foo3();
+        DaggerSetComponent.create().inject(foo3);
+        foo3.print();
+    }
+
+    @Test
+    public void testMultibindingMapTest(){
+        MapComponent component = DaggerMapComponent.create();
+        long value = component.getLongByString().get("foo");
+        String str = component.getStringByClass().get(Foo4.class);
+
+        System.out.println(value);
+        System.out.println(str);
     }
 
 }
