@@ -8,13 +8,21 @@ import com.example.myapplication.Binds.DaggerNoStrComponent;
 import com.example.myapplication.Binds.DaggerStrComponent;
 import com.example.myapplication.Binds.Foo;
 import com.example.myapplication.Binds.Foo2;
+import com.example.myapplication.MapMultiBinding.Animal;
 import com.example.myapplication.MapMultiBinding.DaggerMapComponent;
+import com.example.myapplication.MapMultiBinding.DaggerMapKeyComponent;
 import com.example.myapplication.MapMultiBinding.Foo4;
 import com.example.myapplication.MapMultiBinding.MapComponent;
+import com.example.myapplication.MapMultiBinding.MapKeyComponent;
+import com.example.myapplication.MapMultiBinding.ParentChild.ChildComponent;
+import com.example.myapplication.MapMultiBinding.ParentChild.DaggerParentComponent;
+import com.example.myapplication.MapMultiBinding.ParentChild.ParentComponent;
 import com.example.myapplication.SetMultiBinding.DaggerSetComponent;
 import com.example.myapplication.SetMultiBinding.Foo3;
 
 import org.junit.Test;
+
+import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
 
@@ -54,13 +62,43 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testMultibindingMapTest(){
+    public void testMultibindingMapTest() {
         MapComponent component = DaggerMapComponent.create();
         long value = component.getLongByString().get("foo");
         String str = component.getStringByClass().get(Foo4.class);
 
         System.out.println(value);
         System.out.println(str);
+    }
+
+    @Test
+    public void testCustomMapKey() {
+        MapKeyComponent component = DaggerMapKeyComponent.create();
+        String cat = component.getStringByAnimal().get(Animal.CAT);
+        String dog = component.getStringByAnimal().get(Animal.DOG);
+        String number = component.getStringByNumber().get(Float.class);
+        System.out.println(cat);
+        System.out.println(dog);
+        System.out.println(number);
+    }
+
+    @Test
+    public void testMultibindingWithSubcomponent() {
+        ParentComponent parentComponent = DaggerParentComponent.create();
+        ChildComponent childComponent = parentComponent.childCompBuilder().build();
+
+        System.out.println("List set in Parent");
+
+        Iterator itr = parentComponent.strings().iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+        System.out.println("List set in child");
+
+        itr = childComponent.strings().iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
     }
 
 }
