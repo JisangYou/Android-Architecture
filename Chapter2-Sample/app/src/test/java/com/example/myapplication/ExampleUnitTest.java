@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 
+import com.example.myapplication.AbstractMultiBinding.DaggerMultibindsComponent;
+import com.example.myapplication.AbstractMultiBinding.MultibindsComponent;
 import com.example.myapplication.Binds.BindsComponent;
 
 import com.example.myapplication.Binds.DaggerBindsComponent;
@@ -98,6 +100,15 @@ public class ExampleUnitTest {
         itr = childComponent.strings().iterator();
         while (itr.hasNext()) {
             System.out.println(itr.next());
+        }
+    }
+
+    @Test
+    public void testMultibinds(){
+        MultibindsComponent component = DaggerMultibindsComponent.create();
+
+        for(String s: component.getString()){
+            System.out.println(s);
         }
     }
 

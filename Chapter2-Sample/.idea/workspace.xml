@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1ea1f3d-c72b-4fe1-8135-42ccae24ee1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MapMultiBinding/Animal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MapMultiBinding/AnimalKey.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MapMultiBinding/MapKeyComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MapMultiBinding/MapModule2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MapMultiBinding/NumberKey.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MapMultiBinding/ParentChild/ChildComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MapMultiBinding/ParentChild/ChildModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MapMultiBinding/ParentChild/ParentComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/MapMultiBinding/ParentChild/ParentModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/AbstractMultiBinding/MultibindsComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myapplication/AbstractMultiBinding/MultibindsModules.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -178,25 +171,25 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1398" height="206" key="GridCell.Tab.0.bottom" timestamp="1593497842463">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state width="1398" height="206" key="GridCell.Tab.0.bottom" timestamp="1593498614534">
+      <screen x="0" y="23" width="1440" height="801" />
     </state>
-    <state width="1398" height="206" key="GridCell.Tab.0.bottom/0.23.1440.801@0.23.1440.801" timestamp="1593493734791" />
+    <state width="1398" height="206" key="GridCell.Tab.0.bottom/0.23.1440.801@0.23.1440.801" timestamp="1593498614534" />
     <state width="1398" height="206" key="GridCell.Tab.0.bottom/0.23.1440.804@0.23.1440.804" timestamp="1593497842463" />
-    <state width="1398" height="206" key="GridCell.Tab.0.center" timestamp="1593497842463">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state width="1398" height="206" key="GridCell.Tab.0.center" timestamp="1593498614533">
+      <screen x="0" y="23" width="1440" height="801" />
     </state>
-    <state width="1398" height="206" key="GridCell.Tab.0.center/0.23.1440.801@0.23.1440.801" timestamp="1593493734791" />
+    <state width="1398" height="206" key="GridCell.Tab.0.center/0.23.1440.801@0.23.1440.801" timestamp="1593498614533" />
     <state width="1398" height="206" key="GridCell.Tab.0.center/0.23.1440.804@0.23.1440.804" timestamp="1593497842463" />
-    <state width="1398" height="206" key="GridCell.Tab.0.left" timestamp="1593497842462">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state width="1398" height="206" key="GridCell.Tab.0.left" timestamp="1593498614533">
+      <screen x="0" y="23" width="1440" height="801" />
     </state>
-    <state width="1398" height="206" key="GridCell.Tab.0.left/0.23.1440.801@0.23.1440.801" timestamp="1593493734791" />
+    <state width="1398" height="206" key="GridCell.Tab.0.left/0.23.1440.801@0.23.1440.801" timestamp="1593498614533" />
     <state width="1398" height="206" key="GridCell.Tab.0.left/0.23.1440.804@0.23.1440.804" timestamp="1593497842462" />
-    <state width="1398" height="206" key="GridCell.Tab.0.right" timestamp="1593497842463">
-      <screen x="0" y="23" width="1440" height="804" />
+    <state width="1398" height="206" key="GridCell.Tab.0.right" timestamp="1593498614533">
+      <screen x="0" y="23" width="1440" height="801" />
     </state>
-    <state width="1398" height="206" key="GridCell.Tab.0.right/0.23.1440.801@0.23.1440.801" timestamp="1593493734791" />
+    <state width="1398" height="206" key="GridCell.Tab.0.right/0.23.1440.801@0.23.1440.801" timestamp="1593498614533" />
     <state width="1398" height="206" key="GridCell.Tab.0.right/0.23.1440.804@0.23.1440.804" timestamp="1593497842463" />
     <state x="385" y="151" width="670" height="676" key="search.everywhere.popup" timestamp="1593496383376">
       <screen x="0" y="23" width="1440" height="804" />
