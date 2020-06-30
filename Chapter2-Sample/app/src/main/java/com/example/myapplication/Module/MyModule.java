@@ -13,12 +13,18 @@ public class MyModule {
     }
 
     @Provides
-    @Nullable
-    int provideAge(){
+    int provideAge() {
         return 100;
     }
+
     @Provides
-    Person providePerson(String name, int age){
+    @Nullable
+    Integer provideInteger() {
+        return null;
+    }
+
+    @Provides
+    Person providePerson(String name, int age) {
         return new Person(name, age);
     }
 }
