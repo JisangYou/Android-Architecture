@@ -10,6 +10,10 @@ import android.util.Log;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * DaggerAppCompatActivity를 상속
+ * Dagger Library에 종속성이 높아짐
+ */
 public class MainActivity extends DaggerAppCompatActivity {
 
     @Inject

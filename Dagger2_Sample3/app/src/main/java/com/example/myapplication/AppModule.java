@@ -16,7 +16,7 @@ public abstract class AppModule {
         return "String from AppModule";
     }
 
-//    @ActivityScope
+    @ActivityScope
     @ContributesAndroidInjector(modules = MainActivityModule.class)
     abstract MainActivity mainActivity();
 }

@@ -10,7 +10,7 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class MainActivityModule {
     @Named("activity")
     @Provides
-//    @ActivityScope
+    @ActivityScope
 
     static String provideString(){
 
