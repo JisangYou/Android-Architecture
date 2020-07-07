@@ -9,7 +9,7 @@ import dagger.Provides;
 public class MainFragmentModule {
     @Named("fragment")
     @Provides
-//    @FragmentScope
+    @FragmentScope
     String provideString() {
         return "String from fragment";
     }

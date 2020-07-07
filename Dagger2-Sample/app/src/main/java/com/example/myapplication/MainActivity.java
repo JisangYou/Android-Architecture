@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 세팅 된 component(액티비티)는 프래그먼
+     * @return
+     */
     public MainActivityComponent getComponent() {
         return component;
     }

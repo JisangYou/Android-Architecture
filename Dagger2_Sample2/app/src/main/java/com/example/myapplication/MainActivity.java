@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements HasAndroidInjecto
     @Inject
     DispatchingAndroidInjector<Object> androidInjector;
 
+    // 인젝 받는 곳 및 어노테이션을 통한 데이터 세
     @Inject
     @Named("app")
     String appString;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements HasAndroidInjecto
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
+        AndroidInjection.inject(this); // AndroidInjection?
         Log.e("MainActivity", appString);
         Log.e("MainActivity", activityString);
         super.onCreate(savedInstanceState);

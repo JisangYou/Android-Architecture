@@ -4,7 +4,9 @@ package com.example.myapplication;
 import android.app.Application;
 
 
-// 어플리케이션 상속
+/**
+ * Application을 상속받아, 앱 전체적으로 component를 사용가능
+ */
 public class App extends Application {
 
     private AppComponent appComponent;

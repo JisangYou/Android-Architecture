@@ -12,6 +12,7 @@ import dagger.multibindings.IntoMap;
 
 @Module(subcomponents = MainActivitySubComponent.class)
 public abstract class AppModule {
+    // inject 하는 곳을 위한 세팅
     @Named("app")
     @Provides
     @Singleton

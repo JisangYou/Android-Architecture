@@ -21,6 +21,9 @@ import dagger.Subcomponent;
  * 빌더 인터페이스를 작성하여 다양한 빌더를 사용하는 방법 소개
  */
 
+/**
+ * ActivityScope는 커스터마이징 해서 정의한다.
+ */
 @Subcomponent(modules = MainActivityModule.class)
 //@ActivityScope
 public interface MainActivityComponent  {
