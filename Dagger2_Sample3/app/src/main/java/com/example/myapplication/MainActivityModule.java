@@ -11,13 +11,12 @@ public abstract class MainActivityModule {
     @Named("activity")
     @Provides
     @ActivityScope
-
     static String provideString(){
 
         return "String from MainActivityModule";
     }
 
-//    @FragmentScope
+    @FragmentScope
     @ContributesAndroidInjector(modules = MainFragmentModule.class)
     abstract MainFragment mainFragment();
 }

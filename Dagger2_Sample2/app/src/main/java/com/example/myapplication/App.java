@@ -11,6 +11,8 @@ import dagger.android.HasAndroidInjector;
 /**
  * DispatchingAdnroidInjector를 제공하는 방법
  * : AndroidInjectionModule, HasAndroidInjector, DispatchingAndroidInjector
+ *
+ * dispatcher : 먼저 수행되야 할 작업을 선택해서 공급
  */
 public class App extends Application implements HasAndroidInjector {
     /**

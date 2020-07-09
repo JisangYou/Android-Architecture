@@ -28,10 +28,11 @@ public class MainActivity extends DaggerAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        AndroidInjection.inject(this);
+//        AndroidInjection.inject(this);
+
+        super.onCreate(savedInstanceState);
         Log.e("MainActivity", appString);
         Log.e("MainActivity", activityString);
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new MainFragment()).commit();
     }
