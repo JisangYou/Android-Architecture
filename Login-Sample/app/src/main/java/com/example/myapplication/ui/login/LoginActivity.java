@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        ((App) getApplicationContext()).appComponent.inject(this);
+//        ((App) getApplicationContext()).appComponent.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
