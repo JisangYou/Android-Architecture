@@ -11,12 +11,15 @@ import com.example.myapplication.data.Result;
 import com.example.myapplication.data.model.LoggedInUser;
 import com.example.myapplication.R;
 
+import javax.inject.Inject;
+
 public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
+    @Inject
     LoginViewModel(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }

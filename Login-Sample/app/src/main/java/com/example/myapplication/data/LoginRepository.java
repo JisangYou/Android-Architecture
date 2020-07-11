@@ -2,11 +2,14 @@ package com.example.myapplication.data;
 
 import com.example.myapplication.data.model.LoggedInUser;
 
+import javax.inject.Inject;
+
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
 public class LoginRepository {
+
 
     private static volatile LoginRepository instance;
 
@@ -17,7 +20,8 @@ public class LoginRepository {
     private LoggedInUser user = null;
 
     // private constructor : singleton access
-    private LoginRepository(LoginDataSource dataSource) {
+    @Inject
+    LoginRepository(LoginDataSource dataSource) {
         this.dataSource = dataSource;
     }
 
