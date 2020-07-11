@@ -8,14 +8,21 @@ import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
+    LoginComponent loginComponent;
 
     @Inject
     LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ((MyApplication) getApplicationContext()).appComponent.inject(this);
+
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
+        loginComponent = ((MyApplication) getApplicationContext())
+                .appComponent.loginComponent().create();
+
+        // Make Dagger instantiate @Inject fields in LoginActivity
+        loginComponent.inject(this);
+
+        setContentView(R.layout.activity_main);
     }
 }

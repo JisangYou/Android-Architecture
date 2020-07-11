@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import javax.inject.Inject;
 
+
+@ActivityScope
 public class LoginViewModel {
     private final UserRepository userRepository;
 
