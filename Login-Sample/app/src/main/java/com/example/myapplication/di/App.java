@@ -4,6 +4,16 @@ import android.app.Application;
 
 public class App extends Application {
 
-    AppComponent appComponent = DaggerAppComponent.create();
+    private AppComponent appComponent;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        appComponent = DaggerAppComponent.create();
+    }
+
+    public AppComponent getAppComponent() {
+        return appComponent;
+    }
 
 }

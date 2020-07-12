@@ -17,8 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        loginComponent = ((MyApplication) getApplicationContext())
-                .appComponent.loginComponent().create();
+        loginComponent = ((MyApplication) getApplicationContext()).appComponent.loginComponent().create();
 
         // Make Dagger instantiate @Inject fields in LoginActivity
         loginComponent.inject(this);

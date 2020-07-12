@@ -3,17 +3,18 @@ package com.example.myapplication.data;
 import com.example.myapplication.data.model.LoggedInUser;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
+@Singleton
 public class LoginRepository {
 
 
     private static volatile LoginRepository instance;
 
-    @Inject
     LoginDataSource dataSource;
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
