@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -21,10 +22,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.di.ActivityScope;
 import com.example.myapplication.di.App;
 import com.example.myapplication.di.LoginComponent;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,22 +35,34 @@ public class LoginActivity extends AppCompatActivity {
     @Inject
     LoginViewModel loginViewModel;
 
+    @Inject
+    @Named("login")
+    String testMsg;
+
+    EditText usernameEditText;
+    EditText passwordEditText;
+    Button loginButton;
+    ProgressBar loadingProgressBar;
+
+    String TAG = getClass().getSimpleName();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        loginComponent = ((App) getApplicationContext()).getAppComponent().loginComponent().create();
+        loginComponent.inject(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginComponent = ((App) getApplicationContext()).getAppComponent().loginComponent().create();
 
-        // Make Dagger instantiate @Inject fields in LoginActivity
-        loginComponent.inject(this);
+        Log.d(TAG, testMsg);
+
 
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
+        init();
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -79,8 +94,6 @@ public class LoginActivity extends AppCompatActivity {
                     updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
                 finish();
             }
         });
@@ -124,6 +137,17 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+    }
+
+
+    private void init() {
+        /**
+         * 추후 데이터 바인
+         */
+        usernameEditText = findViewById(R.id.username);
+        passwordEditText = findViewById(R.id.password);
+        loginButton = findViewById(R.id.login);
+        loadingProgressBar = findViewById(R.id.loading);
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
