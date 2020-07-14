@@ -4,7 +4,7 @@ import dagger.Component;
 
 
 @Singleton
-@Component(modules = {StorageModule.class, AppModule.class})
+@Component(modules = {AppModule.class})
 public interface AppComponent {
 
     LoginComponent.Factory loginComponent();
