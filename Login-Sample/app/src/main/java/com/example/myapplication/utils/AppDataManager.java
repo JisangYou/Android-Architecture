@@ -2,13 +2,10 @@ package com.example.myapplication.utils;
 
 import android.content.Context;
 import android.database.Observable;
-
 import com.example.myapplication.data.model.User;
 import com.example.myapplication.helper.ApiHelper;
 import com.example.myapplication.helper.DbHelper;
-
-import java.lang.reflect.Type;
-import java.util.List;
+import com.example.myapplication.helper.PreferencesHelper;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

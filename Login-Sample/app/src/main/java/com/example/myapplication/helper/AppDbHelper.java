@@ -1,9 +1,9 @@
-package com.example.myapplication.utils;
+package com.example.myapplication.helper;
 
 import android.database.Observable;
 
 import com.example.myapplication.data.model.User;
-import com.example.myapplication.helper.DbHelper;
+import com.example.myapplication.utils.AppDatabase;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -21,9 +21,10 @@ public class AppDbHelper implements DbHelper {
         this.mAppDatabase = appDatabase;
     }
 
+
     @Override
     public Observable<Boolean> insertUser(User user) {
         return null;
     }
-
 }
+

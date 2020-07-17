@@ -1,6 +1,10 @@
-package com.example.myapplication;
+package com.example.myapplication.component;
 
-import dagger.Component;
+import com.example.myapplication.ActivityScope;
+import com.example.myapplication.LoginPasswordFragment;
+import com.example.myapplication.LoginUsernameFragment;
+import com.example.myapplication.MainActivity;
+
 import dagger.Subcomponent;
 
 @ActivityScope

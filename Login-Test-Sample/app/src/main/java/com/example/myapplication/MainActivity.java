@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.myapplication.component.LoginComponent;
+
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {

@@ -4,8 +4,7 @@ import android.database.Observable;
 
 import com.example.myapplication.helper.ApiHelper;
 import com.example.myapplication.helper.DbHelper;
-
-import java.util.List;
+import com.example.myapplication.helper.PreferencesHelper;
 
 public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {
 

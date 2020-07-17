@@ -1,4 +1,6 @@
-package com.example.myapplication.utils;
+package com.example.myapplication.helper;
+
+import com.example.myapplication.utils.DataManager;
 
 public interface PreferencesHelper {
     String getAccessToken();

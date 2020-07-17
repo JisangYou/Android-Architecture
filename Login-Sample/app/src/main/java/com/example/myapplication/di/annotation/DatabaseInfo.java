@@ -1,4 +1,4 @@
-package com.example.myapplication.di;
+package com.example.myapplication.di.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,6 +7,5 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApiInfo {
-
+public @interface DatabaseInfo {
 }

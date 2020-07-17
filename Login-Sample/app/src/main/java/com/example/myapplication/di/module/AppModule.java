@@ -1,20 +1,27 @@
-package com.example.myapplication.di;
+package com.example.myapplication.di.module;
 
 
 import android.app.Application;
 import android.content.Context;
 
-import com.example.myapplication.BuildConfig;
+import androidx.room.Room;
+
+import com.example.myapplication.di.annotation.ApiInfo;
+import com.example.myapplication.di.annotation.DatabaseInfo;
+import com.example.myapplication.di.annotation.PreferenceInfo;
+import com.example.myapplication.di.component.LoginComponent;
+import com.example.myapplication.di.component.RegisterComponent;
 import com.example.myapplication.helper.ApiHelper;
 import com.example.myapplication.helper.AppApiHelper;
+import com.example.myapplication.helper.AppDbHelper;
+import com.example.myapplication.helper.AppPreferencesHelper;
 import com.example.myapplication.helper.DbHelper;
 import com.example.myapplication.ui.login.LoginActivity;
 import com.example.myapplication.utils.AppConstants;
 import com.example.myapplication.utils.AppDataManager;
-import com.example.myapplication.utils.AppDbHelper;
-import com.example.myapplication.utils.AppPreferencesHelper;
+import com.example.myapplication.utils.AppDatabase;
 import com.example.myapplication.utils.DataManager;
-import com.example.myapplication.utils.PreferencesHelper;
+import com.example.myapplication.helper.PreferencesHelper;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -23,7 +30,11 @@ import dagger.Module;
 import dagger.Provides;
 
 
-@Module(subcomponents = {LoginComponent.class})
+/**
+ * 추후 NetworkModule, RegisterComponent 등으로 추가할 수 있다.
+ */
+
+@Module(subcomponents = {LoginComponent.class,RegisterModule.class})
 public class AppModule {
 
     //    @ActivityScope -? scope referrence error
@@ -40,18 +51,18 @@ public class AppModule {
         return appApiHelper;
     }
 
-//    @Provides
-//    @ApiInfo
-//    String provideApiKey() {
-//        return BuildConfig.API_KEY;
-//    }
+    @Provides
+    @ApiInfo
+    String provideApiKey() {
+        return "ApiKey";
+    }
 
-//    @Provides
-//    @Singleton
-//    AppDatabase provideAppDatabase(@DatabaseInfo String dbName, Context context) {
-//        return Room.databaseBuilder(context, AppDatabase.class, dbName).fallbackToDestructiveMigration()
-//                .build();
-//    }
+    @Provides
+    @Singleton
+    AppDatabase provideAppDatabase(@DatabaseInfo String dbName, Context context) {
+        return Room.databaseBuilder(context, AppDatabase.class, dbName).fallbackToDestructiveMigration()
+                .build();
+    }
 
 //    @Provides
 //    @Singleton
@@ -103,6 +114,7 @@ public class AppModule {
     PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
         return appPreferencesHelper;
     }
+
 
 //    @Provides
 //    @Singleton

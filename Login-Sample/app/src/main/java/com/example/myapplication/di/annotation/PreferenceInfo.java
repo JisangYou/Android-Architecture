@@ -1,4 +1,4 @@
-package com.example.myapplication.di;
+package com.example.myapplication.di.annotation;
 
 
 import java.lang.annotation.Retention;

@@ -22,9 +22,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.di.ActivityScope;
-import com.example.myapplication.di.App;
-import com.example.myapplication.di.LoginComponent;
+import com.example.myapplication.di.annotation.ApiInfo;
+import com.example.myapplication.App;
+import com.example.myapplication.di.annotation.DatabaseInfo;
+import com.example.myapplication.di.component.LoginComponent;
+import com.example.myapplication.helper.PreferencesHelper;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,6 +40,17 @@ public class LoginActivity extends AppCompatActivity {
     @Inject
     @Named("login")
     String testMsg;
+
+    @Inject
+    @ApiInfo
+    String apiKey;
+
+    @Inject
+    @DatabaseInfo
+    String dbInfo;
+
+    @Inject
+    PreferencesHelper preferencesHelper;
 
     EditText usernameEditText;
     EditText passwordEditText;
@@ -56,6 +69,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Log.d(TAG, testMsg);
+        Log.d(TAG, apiKey);
+        Log.d(TAG, dbInfo);
 
 
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
