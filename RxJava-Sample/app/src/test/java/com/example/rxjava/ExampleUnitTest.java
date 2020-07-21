@@ -11,11 +11,15 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.observables.ConnectableObservable;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 
 import static org.junit.Assert.*;
@@ -232,7 +236,7 @@ public class ExampleUnitTest {
 
     /**
      * Completable
-     *
+     * <p>
      * 정상 실행 됬는지에 대한 것만 관심을 갖는다.
      */
 
@@ -248,4 +252,86 @@ public class ExampleUnitTest {
 
         }).subscribe(() -> System.out.println("completed2"));
     }
+
+    @Test
+    public void cold_observable() {
+        Observable src = Observable.interval(1, TimeUnit.SECONDS);
+        src.subscribe(value -> System.out.println("#1: " + value));
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        src.subscribe(value -> System.out.println("#2: " + value));
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void connectable_observable() throws InterruptedException {
+        ConnectableObservable src = Observable.interval(1, TimeUnit.SECONDS).publish();
+        src.connect();
+        src.subscribe(value -> System.out.println("#1: " + value));
+        Thread.sleep(3000);
+        src.subscribe(value -> System.out.println("#2: " + value));
+        Thread.sleep(3000);
+    }
+
+    /**
+     * 구독자가 2개 붙어야 발행
+     *
+     * @throws InterruptedException
+     */
+    @Test
+    public void auto_connect() throws InterruptedException {
+        Observable<Long> src = Observable.interval(100, TimeUnit.MILLISECONDS).publish().autoConnect(2);
+
+        src.subscribe(i -> System.out.println("A: " + i));
+        src.subscribe(i -> System.out.println("B: " + i));
+        Thread.sleep(500);
+    }
+
+    /**
+     *
+     * 페기하는 기능     *
+     */
+    @Test
+    public void disposable_test1() {
+        Observable source = Observable.just("A", "B", "C");
+        Disposable disposable = source.subscribe(o -> System.out.println(source));
+    }
+
+
+    @Test
+    public void disposable_test2() {
+        Observable source = Observable.interval(1000, TimeUnit.MILLISECONDS);
+        Disposable disposable = source.subscribe(System.out::println);
+        new Thread(()->{
+            try {
+                Thread.sleep(3500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            disposable.dispose();
+        }).start();
+    }
+
+    @Test
+    public void composite_disposable(){
+        Observable source = Observable.interval(1000,TimeUnit.MILLISECONDS);
+        Disposable d1 = source.subscribe(System.out::println);
+        Disposable d2 = source.subscribe(System.out::println);
+        Disposable d3 = source.subscribe(System.out::println);
+        CompositeDisposable cd = new CompositeDisposable();
+        cd.add(d1);
+        cd.add(d2);
+        cd.add(d3);
+
+        cd.dispose();
+    }
+
+
 }
