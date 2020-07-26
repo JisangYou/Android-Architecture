@@ -134,4 +134,78 @@ public class ExampleUnitTest {
                 });
     }
 
+    /**
+     * 누적하는 개념
+     */
+    @Test
+    public void scan() {
+        Observable.range(1, 5)
+                .scan((x, y) -> {
+                    System.out.print(String.format("%d+%d=", x, y));
+                    return x + y;
+                })
+                .subscribe(System.out::println);
+    }
+
+    /**
+     * 그룹을 나눠서 발행.
+     * 발행은 비동기적으로 한다?
+     */
+
+    @Test
+    public void groupBy() {
+        Observable
+                .just("a", "b", "c", "ab", "cb", "db")
+                .groupBy(item -> {
+                    if (item.contains("a")) {
+                        return "hey";
+                    } else if (item.contains("b")) {
+                        return "there";
+                    } else {
+                        return "N";
+                    }
+                })
+                .subscribe(group -> {
+                    System.out.println(group.getKey() + " 그룹 발행 시작");
+                    group.subscribe(shape -> {
+                        System.out.println(group.getKey() + ":" + shape);
+                    });
+                });
+    }
+
+
+    /**
+     * debounce 연산자는 특정 시간 동안 다른 아이템이 발행되지 않을 때만 아이템을 발행하도록 하는 연산자이다.
+     * 반복적으로 빠르게 발행죈 아이템들을 필터링할 때 유용
+     */
+
+    @Test
+    public void debounce() throws InterruptedException {
+        Observable.create(emitter -> {
+            emitter.onNext("1");
+            Thread.sleep(100);
+            emitter.onNext("2");
+            emitter.onNext("3");
+            emitter.onNext("4");
+            Thread.sleep(100);
+            emitter.onNext("5");
+            emitter.onNext("6");
+        })
+                .debounce(10, TimeUnit.MILLISECONDS)
+                .subscribe(System.out::println);
+
+        Thread.sleep(300);
+    }
+
+
+    /**
+     * 이미 발행한 아이템을 중복해 발행하지 않도록 필터링한다.
+     */
+
+    @Test
+    public void distinct() {
+        Observable.just(1, 2, 2, 1, 3)
+                .distinct()
+                .subscribe(System.out::println);
+    }
 }
