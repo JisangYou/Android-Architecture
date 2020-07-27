@@ -318,6 +318,71 @@ public class ExampleUnitTest {
         Observable.combineLatest(src1, src2, (num, str) -> num + str).subscribe(System.out::println);
         Thread.sleep(5000);
     }
+
+
+    /**
+     * 여러 Observable을 하나의 Observable처럼 결합하여 사용
+     */
+
+    @Test
+    public void merge() throws InterruptedException {
+        Observable src1 = Observable.intervalRange(1, 5, 0, 100, TimeUnit.MILLISECONDS).map(value -> value * 20);
+        Observable src2 = Observable.create(emitter ->
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(350);
+                        emitter.onNext(1);
+                        Thread.sleep(200);
+                        emitter.onNext(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }).start());
+        Observable.merge(src1, src2).subscribe(System.out::println);
+        Thread.sleep(1000);
+    }
+
+    @Test
+    public void error() {
+        Observable.just("1", "2", "a", "3").map(i -> Integer.parseInt(i)).subscribe(System.out::println);
+    }
+
+    /**
+     * subscribe 단에서 에러 핸들링
+     */
+    @Test
+    public void throwable() {
+        Observable.just("1", "2", "a", "3").map(i -> Integer.parseInt(i)).subscribe(System.out::println, throwable -> System.out.println("Error"));
+    }
+
+    /**
+     * 오류가 발생하면 아이템 발행을 종료하고, onError()를 호출하는 대신에 오류처리를 위한 함수를 실행
+     */
+
+    @Test
+    public void onErrorReturn() {
+        Observable.just("1", "2", "a", "3").map(i -> Integer.parseInt(i)).onErrorReturn(throwable -> -1).subscribe(System.out::println);
+    }
+
+    /**
+     * 오류 발생 시 기존 스트림을 종료시키고, 다른 Observable 소스로 스트림을 대체
+     */
+
+    @Test
+    public void onErrorResumeNext() {
+        Observable.just("1", "2", "a", "3").map(i -> Integer.parseInt(i)).onErrorResumeNext(throwable -> Observable.just(100, 200, 300)).subscribe(System.out::println);
+    }
+
+
+    /**
+     * ObservableDL error를 발행할 때, Observable을 재구독하도록 한다.
+     */
+
+    @Test
+    public void retry() {
+//        Observable.just("1", "2", "a", "3").map(i -> Integer.parseInt(i)).retry().subscribe(System.out::println);
+        Observable.just("1", "2", "a", "3").map(i -> Integer.parseInt(i)).retry(2).subscribe(System.out::println, throwable -> throwable.printStackTrace());
+    }
 }
 
 
