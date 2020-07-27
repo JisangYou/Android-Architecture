@@ -208,4 +208,137 @@ public class ExampleUnitTest {
                 .distinct()
                 .subscribe(System.out::println);
     }
+
+    /**
+     * 특정 인덱스에 해당하는 값
+     */
+    @Test
+    public void elementAt() {
+        Observable.just(1, 2, 3, 4).elementAt(2).subscribe(System.out::println);
+    }
+
+    /**
+     * 조건식이 true 일떄만 아이템을 발
+     */
+    @Test
+    public void filter() {
+        Observable.just(2, 30, 22, 5, 60, 1)
+                .filter(x -> x > 10)
+                .subscribe(System.out::println);
+    }
+
+    /**
+     * 일정 시간 간격으로 최근에 Observable이 배출한 아이템들을 방출하는 연산자이다.
+     *
+     * @throws InterruptedException
+     */
+    @Test
+    public void sample() throws InterruptedException {
+        Observable.interval(100, TimeUnit.MILLISECONDS)
+                .sample(300, TimeUnit.MILLISECONDS)
+                .subscribe(System.out::println);
+        Thread.sleep(1000);
+    }
+
+    /**
+     * n개의 아이템을 무시하고 이후에 나오는 아이템을 발행하는 연산
+     */
+
+    @Test
+    public void skip() {
+        Observable.just(1, 2, 3, 4).skip(2).subscribe(System.out::println);
+    }
+
+    /**
+     * skip과 반대로 n개의 아이템만 방출하는 연산
+     */
+
+    @Test
+    public void take() {
+        Observable.just(1, 2, 3, 4).take(2).subscribe(System.out::println);
+    }
+
+    /**
+     * 모든 발행되는 아이템이 특정 조건을 만족할 때 true를 반환한다.
+     */
+
+    @Test
+    public void all() {
+        Observable.just(2, 1).all(integer -> integer > 0).subscribe(System.out::println);
+    }
+
+    /**
+     * 여러 개의 Observable들을 동시에 구독하고, 그중 가장 먼저 아이템을 발행하는 Observable을 선택하고 싶을
+     */
+    @Test
+    public void amb() {
+        ArrayList<Observable<Integer>> list = new ArrayList<>();
+        list.add(Observable.just(20, 40, 60).delay(100, TimeUnit.MILLISECONDS));
+        list.add(Observable.just(1, 2, 3));
+        list.add(Observable.just(0, 0, 0).delay(200, TimeUnit.MILLISECONDS));
+        Observable.amb(list).subscribe(System.out::println);
+    }
+
+    /**
+     * 여러 Observable 소스를 결합하여 하나의 Observable을 생성하고, 동작하는 연산자
+     * 여러개의 http 요청에 의한 응답을 하나로 묶어서 처리할 때 사용
+     */
+
+    @Test
+    public void combineLatest() throws InterruptedException {
+        Observable<Integer> src1 = Observable.create(emitter -> {
+            new Thread(() -> {
+                for (int i = 1; i <= 5; i++) {
+                    emitter.onNext(i);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        });
+        Observable<String> src2 = Observable.create(emitter -> {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                    emitter.onNext("A");
+                    Thread.sleep(700);
+                    emitter.onNext("B");
+                    Thread.sleep(100);
+                    emitter.onNext("C");
+                    Thread.sleep(700);
+                    emitter.onNext("D");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }).start();
+        });
+        Observable.combineLatest(src1, src2, (num, str) -> num + str).subscribe(System.out::println);
+        Thread.sleep(5000);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
