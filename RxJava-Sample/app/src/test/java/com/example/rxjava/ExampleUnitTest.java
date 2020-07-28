@@ -54,7 +54,7 @@ public class ExampleUnitTest {
 
 
     /**
-     * interval 연산자는 주어진 시간 간격으로 순서대로 정수를 발행하는  Observable
+     * interval 연산자는 주어진 시간 간격으로 순서대로 정수를 발행하는 Observable
      */
     @Test
     public void interval() {
@@ -218,7 +218,7 @@ public class ExampleUnitTest {
     }
 
     /**
-     * 조건식이 true 일떄만 아이템을 발
+     * 조건식이 true 일떄만 아이템을 발행
      */
     @Test
     public void filter() {
@@ -494,6 +494,7 @@ public class ExampleUnitTest {
 
     /**
      * onError, onComplete 또는 스트림이 폐기될 때 doFinally가 호출됨.
+     *
      * @throws InterruptedException
      */
     @Test
