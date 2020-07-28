@@ -383,6 +383,129 @@ public class ExampleUnitTest {
 //        Observable.just("1", "2", "a", "3").map(i -> Integer.parseInt(i)).retry().subscribe(System.out::println);
         Observable.just("1", "2", "a", "3").map(i -> Integer.parseInt(i)).retry(2).subscribe(System.out::println, throwable -> throwable.printStackTrace());
     }
+
+
+    /**
+     * zip 연산자는 여러 Observable을 하나로 결합하여 지정된 함수를 통해 하나의 아이템으로 발행한다.
+     *
+     * @throws InterruptedException
+     */
+
+    @Test
+    public void zip() throws InterruptedException {
+        Observable<Integer> src1 = Observable.create(emitter -> {
+            new Thread(() -> {
+                for (int i = 1; i <= 5; i++) {
+                    emitter.onNext(i);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        });
+        Observable<String> src2 = Observable.create(emitter -> {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                    emitter.onNext("A");
+                    Thread.sleep(700);
+                    emitter.onNext("B");
+                    Thread.sleep(100);
+                    emitter.onNext("C");
+                    Thread.sleep(700);
+                    emitter.onNext("D");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }).start();
+        });
+        Observable.zip(src1, src2, (num, str) -> num + str).subscribe(System.out::println);
+        Thread.sleep(5000);
+    }
+
+    /**
+     * 임의로 doOnNext에서 예외를 던
+     */
+
+    @Test
+    public void doOnNext() {
+        Observable.just(1, 2, 3).doOnNext(item -> {
+            if (item > 1) {
+                throw new IllegalArgumentException();
+            }
+        }).subscribe(System.out::println, throwable -> throwable.printStackTrace());
+    }
+
+    /**
+     * 구독 시 마다 콜백을 받을 수 있음.
+     */
+
+    @Test
+    public void doOnSubscribe() {
+        Observable.just(1, 2, 3).doOnSubscribe(disposable -> System.out.println("구독 시작!")).subscribe(System.out::println);
+    }
+
+    /**
+     * Emitter의 OnComplete() 호출로 Observable이 정상적으로 종료될 떄 호출되는 콜
+     */
+
+    @Test
+    public void doOnComplete() {
+        Observable.just(1, 2, 3).doOnComplete(() -> System.out.println("완료!!")).subscribe(System.out::println);
+    }
+
+    /**
+     * onError() 호출로 Observable이 정상적으로 종료되지 않을 떄 호출되는 콜
+     */
+
+    @Test
+    public void doOnError() {
+        Observable.just(2, 1, 0).map(i -> 10 / i).doOnError(throwable -> System.out.println("오류!!")).subscribe(System.out::println, t -> t.printStackTrace());
+    }
+
+    /**
+     * doOnTerminate 연산자는 Obseravable이 종료될 때 호출되는 콜백으로 onComplete 연산자와 차이점은 오류가 발생했을 때도 콜백이 호
+     */
+
+    @Test
+    public void doOnTerminate() {
+        Observable.just(2, 1, 0).map(i -> 10 / i)
+                .doOnComplete(() -> System.out.println("doOnComplete"))
+                .doOnTerminate(() -> System.out.println("doOnTerminate"))
+                .subscribe(System.out::println, t -> t.printStackTrace());
+    }
+
+    /**
+     * doOnDispose는 구독 중인 스트림이 dispose() 메서드 호출로 인해 폐기되는 경우에 콜백이 호출
+     *
+     * @throws InterruptedException
+     */
+
+    @Test
+    public void doOnDispose() throws InterruptedException {
+        Observable src = Observable.interval(500, TimeUnit.MILLISECONDS).doOnDispose(() -> System.out.println("doOnDispose"));
+        Disposable disposable = src.subscribe(System.out::println);
+        Thread.sleep(1100);
+        disposable.dispose();
+    }
+
+    /**
+     * onError, onComplete 또는 스트림이 폐기될 때 doFinally가 호출됨.
+     * @throws InterruptedException
+     */
+    @Test
+    public void doOnFinally() throws InterruptedException {
+        Observable src = Observable.interval(500, TimeUnit.MILLISECONDS)
+                .doOnComplete(() -> System.out.println("doOnComplete"))
+                .doOnTerminate(() -> System.out.println("doOnTerminate"))
+                .doFinally(() -> System.out.println("doFinally"));
+        Disposable disposable = src.subscribe(System.out::println);
+        Thread.sleep(1100);
+        disposable.dispose();
+    }
 }
 
 
