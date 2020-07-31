@@ -4,7 +4,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 
 import static org.junit.Assert.*;
@@ -15,44 +18,70 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void Schedulers() {
+        /**
+         * io 스케쥴러
+         * 네트워크, 데이터베이스, 파일 시스템 환경 등의 블로킹 이슈가 발생하는 곳에서 비동기적인 작업을 위해 사용
+         */
+        Scheduler io = Schedulers.io();
+        /**
+         * newThread 스케쥴러
+         * 매번 새로운 스케쥴러 생성
+         */
+        Scheduler newThread = Schedulers.newThread();
+        /**
+         * Computation 스케쥴러
+         * 단순 반복작업, 콜백 그리고 다른 계산적인 작업에 사용
+         */
+        Scheduler computation = Schedulers.computation();
+        /**
+         * Trampoline 스케쥴러
+         * 새로운 쓰레드 생성 X -> 현재 스레드에 무한한 크기의 큐를 생성하는 스케쥴러
+         */
+        Scheduler trampoline = Schedulers.trampoline();
+
+        /**
+         * mainThread 스케쥴러
+         * 안드로이드 메인스레드에서 작동하는 스케쥴러
+         */
+        Scheduler mainThread = AndroidSchedulers.mainThread();
     }
 
     @Test
-    public void imperative_programming() {
-        ArrayList<Integer> items = new ArrayList<>();
-        items.add(1);
-        items.add(2);
-        items.add(3);
-        items.add(4);
-
-
-        for (Integer item : items) {
-            if (item % 2 == 0) {
-                System.out.println(item);
+    public void Schedulers1() {
+        Observable<Integer> src = Observable.create(emitter -> {
+            for (int i = 0; i < 3; i++) {
+                String threadName = Thread.currentThread().getName();
+                System.out.println("#Subs on " + threadName + ": " + i);
+                emitter.onNext(i);
+                Thread.sleep(100);
             }
-        }
-        items.add(5);
-        items.add(6);
-        items.add(7);
-        items.add(8);
+            emitter.onComplete();
+        });
+        src.subscribe(s -> {
+            String threadName = Thread.currentThread().getName();
+            System.out.println("#Obsv on" + threadName + ": " + s);
+        });
     }
 
     @Test
-    public void reactive_programming() {
-        PublishSubject<Integer> items = PublishSubject.create();
-        items.onNext(1);
-        items.onNext(2);
-        items.onNext(3);
-        items.onNext(4);
-        items.filter(item -> item % 2 == 0).subscribe(System.out::println);
-        items.onNext(5);
-        items.onNext(6);
-        items.onNext(7);
-        items.onNext(8);
+    public void Schedulers2() throws InterruptedException {
+        Observable<Integer> src = Observable.create(emitter -> {
+            for (int i = 0; i < 3; i++) {
+                String threadName = Thread.currentThread().getName();
+                System.out.println("#Subs on " + threadName + ": " + i);
+                emitter.onNext(i);
+                Thread.sleep(100);
+            }
+            emitter.onComplete();
+        });
+        src.subscribeOn(Schedulers.io())
+                .subscribe(s -> {
+                    String threadName = Thread.currentThread().getName();
+                    System.out.println("#Obsv on" + threadName + ": " + s);
+                });
+        Thread.sleep(500);
     }
-
-
 }
