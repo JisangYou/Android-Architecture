@@ -3,6 +3,7 @@ package com.example.rxjava;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -84,4 +85,39 @@ public class ExampleUnitTest {
                 });
         Thread.sleep(500);
     }
+
+    @Test
+    public void Schedulers3() throws InterruptedException {
+        Observable<Integer> src = Observable.create(emitter -> {
+            for (int i = 0; i < 3; i++) {
+                String threadName = Thread.currentThread().getName();
+                System.out.println("#Subs on " + threadName + ": " + i);
+                emitter.onNext(i);
+                Thread.sleep(100);
+            }
+            emitter.onComplete();
+        });
+        src.observeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.io())
+                .subscribe(s -> {
+                    String threadName = Thread.currentThread().getName();
+                    System.out.println("#Obsv on" + threadName + ": " + s);
+                });
+        Thread.sleep(500);
+    }
+
+    @Test
+    public void Schedulers4() throws InterruptedException {
+
+        Observable.interval(200, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .subscribe(s -> {
+                    String threadName = Thread.currentThread().getName();
+                    System.out.println("#Obsv on" + threadName + ": " + s);
+                });
+        Thread.sleep(1000);
+        
+    }
+
+
 }
