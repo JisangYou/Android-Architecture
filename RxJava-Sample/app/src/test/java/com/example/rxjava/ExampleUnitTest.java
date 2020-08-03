@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
 
     @Test
-    public void Schedulers() {
+    public void schedulers() {
         /**
          * io 스케쥴러
          * 네트워크, 데이터베이스, 파일 시스템 환경 등의 블로킹 이슈가 발생하는 곳에서 비동기적인 작업을 위해 사용
@@ -51,7 +51,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void Schedulers1() {
+    public void schedulers1() {
         Observable<Integer> src = Observable.create(emitter -> {
             for (int i = 0; i < 3; i++) {
                 String threadName = Thread.currentThread().getName();
@@ -68,7 +68,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void Schedulers2() throws InterruptedException {
+    public void schedulers2() throws InterruptedException {
         Observable<Integer> src = Observable.create(emitter -> {
             for (int i = 0; i < 3; i++) {
                 String threadName = Thread.currentThread().getName();
@@ -87,7 +87,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void Schedulers3() throws InterruptedException {
+    public void schedulers3() throws InterruptedException {
         Observable<Integer> src = Observable.create(emitter -> {
             for (int i = 0; i < 3; i++) {
                 String threadName = Thread.currentThread().getName();
@@ -107,7 +107,7 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void Schedulers4() throws InterruptedException {
+    public void schedulers4() throws InterruptedException {
 
         Observable.interval(200, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
