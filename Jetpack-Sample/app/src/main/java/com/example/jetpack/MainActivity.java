@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.example.jetpack.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
@@ -38,12 +42,23 @@ public class MainActivity extends AppCompatActivity {
         /**
          * 포조 클래스 변수 선언
          */
-        User user = new User("Jay", "ComeOn");
-        binding.setUser(user);
+//        User user = new User("Jay", "ComeOn");
+//        binding.setUser(user);
         /**
-         * 바인딩 표현식
+         * 바인딩 표현식 중 Collections
          */
-
+        binding.setIndex(2);
+        binding.setKey("a");
+        ArrayList arrayList = new ArrayList();
+        arrayList.add("2");
+        arrayList.add("3");
+        arrayList.add("4");
+        binding.setList(arrayList);
+        Map map = new HashMap();
+        map.put("test1","hello1");
+        map.put("test2","hello2");
+        map.put("test3","hello3");
+        binding.setMap(map);
 
     }
 }
