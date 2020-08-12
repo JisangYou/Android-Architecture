@@ -40,5 +40,10 @@ public class MainActivity extends AppCompatActivity {
          */
         User user = new User("Jay", "ComeOn");
         binding.setUser(user);
+        /**
+         * 바인딩 표현식
+         */
+
+
     }
 }
