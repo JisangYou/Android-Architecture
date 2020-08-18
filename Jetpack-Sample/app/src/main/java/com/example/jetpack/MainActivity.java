@@ -47,18 +47,21 @@ public class MainActivity extends AppCompatActivity {
         /**
          * 바인딩 표현식 중 Collections
          */
-        binding.setIndex(2);
-        binding.setKey("a");
-        ArrayList arrayList = new ArrayList();
-        arrayList.add("2");
-        arrayList.add("3");
-        arrayList.add("4");
-        binding.setList(arrayList);
-        Map map = new HashMap();
-        map.put("test1","hello1");
-        map.put("test2","hello2");
-        map.put("test3","hello3");
-        binding.setMap(map);
+//        binding.setIndex(2);
+//        binding.setKey("a");
+//        ArrayList arrayList = new ArrayList();
+//        arrayList.add("2");
+//        arrayList.add("3");
+//        arrayList.add("4");
+//        binding.setList(arrayList);
+//        Map map = new HashMap();
+//        map.put("test1","hello1");
+//        map.put("test2","hello2");
+//        map.put("test3","hello3");
+//        binding.setMap(map);
+
+        User user = new User("Jay", "ComeOn", "119");
+        binding.setUser(user);
 
     }
 }

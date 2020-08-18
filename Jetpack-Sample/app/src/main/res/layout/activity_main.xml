@@ -1,33 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="android.util.SparseArray" />
 
-        <import type="java.util.Map" />
-
-        <import type="java.util.List" />
+        <import type="android.view.View" />
 
         <variable
-            name="list"
-            type="List&lt;String>" />
-
-        <variable
-            name="sparse"
-            type="SparseArray&lt;String>" />
-
-        <variable
-            name="map"
-            type="Map&lt;String, String>" />
-
-        <variable
-            name="index"
-            type="int" />
-
-        <variable
-            name="key"
-            type="String" />
+            name="user"
+            type="com.example.jetpack.User" />
 
     </data>
 
@@ -37,26 +18,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--        <TextView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="@{user.firstName != null ? user.firstName : user.lastName}" />-->
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{list[index]}" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{sparse[index]}" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{map[`test1`]}" />
+        <include
+            layout="@layout/contact"
+            app:user="@{user}" />
 
 
     </LinearLayout>
