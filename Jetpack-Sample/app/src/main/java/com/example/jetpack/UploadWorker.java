@@ -23,7 +23,7 @@ public class UploadWorker extends Worker {
 
 //        uploadImages();
         String imageUriInput = getInputData().getString("key");
-        Response response = uploadFile(imageUriInput);
+//        Response response = uploadFile(imageUriInput);
         Data outputData = new Data.Builder().putString("key", "value").build();
 
         // 작업이 끝나면 알림을 준다.
@@ -39,8 +39,8 @@ public class UploadWorker extends Worker {
 
     }
 
-    private Response uploadFile(String imageUriInput) {
-    }
+//    private Response uploadFile(String imageUriInput) {
+//    }
 
 
 }

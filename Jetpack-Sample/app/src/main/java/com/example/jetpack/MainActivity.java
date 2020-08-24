@@ -2,15 +2,19 @@ package com.example.jetpack;
 
 
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 
+
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.ArrayCreatingInputMerger;
 import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,5 +67,51 @@ public class MainActivity extends AppCompatActivity {
         OneTimeWorkRequest uploadWorkRequest2 = new OneTimeWorkRequest.Builder(UploadWorker.class).setInputData(imageData).build();
 
 
+        /**
+         * 작업 상태
+         * BLOCKED
+         * CANCELLED
+         * ENQUEUED
+         * FAILED
+         * RUNNING
+         * SUCCEEDED
+         */
+
+        /**
+         * 작업 관찰하기
+         */
+
+//        WorkManager.getInstance(this).getWorkInfoByIdLiveData(uploadWorkRequest.getId()).observe(getLifecycle(), Observer
+//        {
+//            workInfo -> if(workInfo != null && workInfo.state == WorkInfo.State.SUCCEEDED){
+//            }
+//        })
+
+        /**
+         * 작업 체이닝
+         */
+//        WorkManager.getInstance(this).beginWith(Arrays.asList(filter,filter,filter)).then(compress).then(upload).enqueue();
+
+        /**
+         * Input Merger
+         */
+//        OneTimeWorkRequest compress =
+//                new OneTimeWorkRequest.Builder(CompressWorker.class).setInputMerger(ArrayCreatingInputMerger.class).setConstraints(constraints).build();
+
+        /**
+         * 작업 취소 및 중단
+         */
+
+//        WorkManager.getInstance(this).cancelWorkById(uploadWorkRequest.getId());
+
+
+        /**
+         * 반복 작업
+         */
+
+//        Constraints constraints = new Constraints.Builder().setRequiresCharging(true).build();
+//        PeriodicWorkRequest saveRequest = new PeriodicWorkRequest.Builder(SaveImageFileWorker.class, 1, TimeUnit.HOURS).setConstraints(constraints).build();
+//
+//        WorkManager.getInstance(this).enqueue(saveRequest);
     }
 }
