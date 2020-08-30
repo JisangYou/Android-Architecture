@@ -2,14 +2,23 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <!--        메서드 참조-->
+        <!--        <variable-->
+        <!--            name="handlers"-->
+        <!--            type="com.example.jetpack.MyHandlers" />-->
 
+        <!--        <variable-->
+        <!--            name="user"-->
+        <!--            type="com.example.jetpack.User" />-->
 
-        <import type="android.view.View" />
 
         <variable
-            name="user"
-            type="com.example.jetpack.User" />
+            name="task"
+            type="com.example.jetpack.Task" />
 
+        <variable
+            name="presenter"
+            type="com.example.jetpack.Presenter" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,11 +26,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:onClick="@{() -> presenter.onSaveClick(task)}"/>-->
 
-        <include
-            layout="@layout/contact"
-            app:user="@{user}" />
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:onClick="@{(view) -> presenter.onSaveClick(view, task)}"/>-->
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onCheckedChanged="@{(cb, isChecked) -> presenter.onCompleteChanged(task, isChecked)}" />
 
     </LinearLayout>
 </layout>
