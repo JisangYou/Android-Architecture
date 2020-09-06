@@ -6,8 +6,10 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Activity;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jetpack.databinding.ActivityMainBinding;
 
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityMainBinding binding;
 
@@ -28,8 +30,13 @@ public class MainActivity extends AppCompatActivity {
 //        ActivityMainBinding binding2 = ActivityMainBinding.inflate(getLayoutInflater());
 //        ActivityMainBinding binding3 = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_main, getParent(), attachToParent);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        /**
+         * 바인딩 어댑터로 클릭이벤트 처리 가능
+         */
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main, new ClickBindingComponent(getLifecycle()));
         LinearLayout rootLayout = binding.root;
+        binding.setClickListener(this);
         /**
          * id로 View 참조하기.
          */
@@ -66,4 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(view.getContext(), "clicked",Toast.LENGTH_LONG).show();
+    }
 }

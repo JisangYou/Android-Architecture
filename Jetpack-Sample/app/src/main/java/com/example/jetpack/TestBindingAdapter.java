@@ -1,67 +1,19 @@
 package com.example.jetpack;
 
 import android.content.Context;
-import android.view.ViewGroup;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.databinding.ViewDataBinding;
-import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.BindingMethod;
+import androidx.databinding.BindingMethods;
 
-public class TestBindingAdapter extends RecyclerView.Adapter<TestBindingAdapter.BindingHolder> {
-
-    ArrayList<String> arrayList;
-    Context context;
-
-    public TestBindingAdapter(Context context) {
-        arrayList = new ArrayList<String>();
-        arrayList.add("jisang");
-        this.context = context;
+public class TestBindingAdapter {
+    @BindingAdapter({"error"})
+    public static void loadImage(ImageView view, Drawable error) {
+        Glide.with(view).load(error).error(error).into(view);
     }
 
-    @NonNull
-    @Override
-    public BindingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull BindingHolder holder, int position) {
-
-        String item = arrayList.get(position);
-
-        /**
-         * ~~
-         */
-//        holder.getBinding().setData(getItem(position));
-
-//        holder.getBinding().setVariable(BR.item, item);
-        holder.getBinding().executePendingBindings();
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-
-
-    // 즉각적인 바인딩하기
-    class BindingHolder<T extends ViewDataBinding> extends RecyclerView.ViewHolder {
-        private T binding;
-
-        //    public BindingHolder(@NonNull View itemView) {
-//        super(itemView);
-//    }
-        public BindingHolder(@NonNull T binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-
-        public T getBinding() {
-            return binding;
-        }
-
-    }
 }

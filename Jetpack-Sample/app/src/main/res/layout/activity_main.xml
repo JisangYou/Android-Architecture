@@ -19,6 +19,10 @@
         <variable
             name="presenter"
             type="com.example.jetpack.Presenter" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -40,6 +44,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onCheckedChanged="@{(cb, isChecked) -> presenter.onCompleteChanged(task, isChecked)}" />
+
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:error="@{@drawable/ic_launcher_background}" />-->
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:onClick="@{clickListener}" />
 
     </LinearLayout>
 </layout>
