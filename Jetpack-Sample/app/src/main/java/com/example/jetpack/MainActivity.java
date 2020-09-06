@@ -61,12 +61,7 @@ public class MainActivity extends AppCompatActivity {
 //        binding.setMap(map);
 
         User user = new User("Jay", "ComeOn", "119");
-        binding.setUser(user);
-
-        /**
-         * 메서드 참조
-         */
-
+//        binding.setUser(user);
 
 
     }
