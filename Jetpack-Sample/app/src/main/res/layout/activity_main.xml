@@ -1,60 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-        <!--        메서드 참조-->
-        <!--        <variable-->
-        <!--            name="handlers"-->
-        <!--            type="com.example.jetpack.MyHandlers" />-->
-
-        <!--        <variable-->
-        <!--            name="user"-->
-        <!--            type="com.example.jetpack.User" />-->
 
 
-        <variable
-            name="task"
-            type="com.example.jetpack.Task" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-        <variable
-            name="presenter"
-            type="com.example.jetpack.Presenter" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name" />
 
-        <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
-    </data>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/root"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <!--        <TextView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:onClick="@{() -> presenter.onSaveClick(task)}"/>-->
-
-        <!--        <TextView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:onClick="@{(view) -> presenter.onSaveClick(view, task)}"/>-->
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onCheckedChanged="@{(cb, isChecked) -> presenter.onCompleteChanged(task, isChecked)}" />
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:error="@{@drawable/ic_launcher_background}" />-->
-
-        <Button
-            android:id="@+id/btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:onClick="@{clickListener}" />
-
-    </LinearLayout>
-</layout>
+</LinearLayout>
