@@ -3,11 +3,9 @@ package com.example.jetpack;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
-public class User {
+@Entity(ignoredColumns = "picture")
+public class RemoteUser extends User2 {
     @PrimaryKey
     public int id;
-
-    public String firstName;
-    public String lastName;
+    public boolean hasVpn;
 }
