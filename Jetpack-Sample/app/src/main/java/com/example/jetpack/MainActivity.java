@@ -3,6 +3,8 @@ package com.example.jetpack;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
@@ -16,22 +18,12 @@ class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /**
-         * 반드시 메인 스레드에서만 호출해야한다.
-         */
-        liveString.setValue("Hello Jay");
 
-        /**
-         * 주로 백그라운드 스레드에서 호출하는 용도로 사용된다.
-         */
-        liveString.postValue("Hello World");
-        liveString.observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
+        MyViewModel model = ViewModelProviders.of(this).get(MyViewModel.class);
 
-            }
+        model.getUsers().observe(this, users -> {
+            // LiveData를 관찰하고 이곳에서 사용자 목록을 얻는다.
         });
-
     }
 }
 
